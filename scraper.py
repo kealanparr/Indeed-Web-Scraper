@@ -1,8 +1,14 @@
 #!/usr/bin/env python
-# coding: utf-8
+# coding: utf-8 // K: This looks a little odd. Are you using Python 3 or 2? This is inferred by Python 3 and can be removed (https://peps.python.org/pep-3120/)
+# K: I would also not add spaces into your filenames. I'd personally just name it 'scraper.py' or similar. But that's more preference
 
-# In[ ]:
+# In[ ]: // K: This comment is scattered throughout the code, but I have no idea what it does? Why do you need this?
 
+# K: Try and keep your whitespace consistent, sometimes you use 3 blank lines, sometimes 2. Try and keep it consistent throughout
+# K: I also can't get the script to run, it errors. Just letting you know, why I haven't provided much feedback on the code itself as it wouldn't run
+# K: It gets to line 92, and the line
+# pagination = soup.find(class_="mosaic-zone")
+# K: When I logged it, just returns "None" --> https://imgur.com/a/Qpmpitq
 
 from bs4 import BeautifulSoup
 import requests
@@ -80,13 +86,13 @@ def salary_split(item):
 # In[ ]:
 
 
-i = 0
+i = 0 # K: This doesn't seem like it's doing much, as you only have 1 link inside the page_numbers variable. You don't need to loop over it
 while i < 5:
     url = page_numbers[i]
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     pagination = soup.find(class_="mosaic-zone")
-    
+    print(pagination)
     a_tag = pagination.find_all("li")
     for href in a_tag:
         href = href.get('href')
